@@ -1,8 +1,11 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { type DefaultSession, type NextAuthConfig } from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
+import MicrosoftEntraID from "next-auth/providers/microsoft-entra-id"
+
 
 import { db } from "@/server/db";
+import { env } from "@/env";
+import { UserRole } from "../../../generated/prisma";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -15,13 +18,13 @@ declare module "next-auth" {
     user: {
       id: string;
       // ...other properties
-      // role: UserRole;
+      role: UserRole;
     } & DefaultSession["user"];
   }
 
   // interface User {
   //   // ...other properties
-  //   // role: UserRole;
+    // role: UserRole;
   // }
 }
 
@@ -32,7 +35,11 @@ declare module "next-auth" {
  */
 export const authConfig = {
   providers: [
-    DiscordProvider,
+    MicrosoftEntraID({
+      clientId: env.AUTH_MICROSOFT_ENTRA_ID_ID,
+      clientSecret: env.AUTH_MICROSOFT_ENTRA_ID_SECRET,
+      issuer: env.AUTH_MICROSOFT_ENTRA_ID_ISSUER,
+    }),
     /**
      * ...add more providers here.
      *

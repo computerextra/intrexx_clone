@@ -137,6 +137,8 @@ exports.Prisma.AccountScalarFieldEnum = {
   refresh_token: 'refresh_token',
   access_token: 'access_token',
   expires_at: 'expires_at',
+  expires_in: 'expires_in',
+  ext_expires_in: 'ext_expires_in',
   token_type: 'token_type',
   scope: 'scope',
   id_token: 'id_token',
@@ -156,7 +158,13 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   emailVerified: 'emailVerified',
-  image: 'image'
+  image: 'image',
+  userRoleId: 'userRoleId'
+};
+
+exports.Prisma.UserRoleScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
 };
 
 exports.Prisma.VerificationTokenScalarFieldEnum = {
@@ -204,7 +212,13 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
-  image: 'image'
+  image: 'image',
+  userRoleId: 'userRoleId'
+};
+
+exports.Prisma.UserRoleOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name'
 };
 
 exports.Prisma.VerificationTokenOrderByRelevanceFieldEnum = {
@@ -218,6 +232,7 @@ exports.Prisma.ModelName = {
   Account: 'Account',
   Session: 'Session',
   User: 'User',
+  UserRole: 'UserRole',
   VerificationToken: 'VerificationToken'
 };
 
