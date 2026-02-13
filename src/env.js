@@ -14,7 +14,8 @@ export const env = createEnv({
     AUTH_MICROSOFT_ENTRA_ID_ID: z.string(),
     AUTH_MICROSOFT_ENTRA_ID_SECRET: z.string(),
     AUTH_MICROSOFT_ENTRA_ID_ISSUER: z.url(),
-    DATABASE_URL: z.url(),
+    CE_DATABASE_URL: z.url(),
+    SAGE_DATABASE_URL: z.url(),
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -38,7 +39,8 @@ export const env = createEnv({
     AUTH_MICROSOFT_ENTRA_ID_ID: process.env.AUTH_MICROSOFT_ENTRA_ID_ID,
     AUTH_MICROSOFT_ENTRA_ID_SECRET: process.env.AUTH_MICROSOFT_ENTRA_ID_SECRET,
     AUTH_MICROSOFT_ENTRA_ID_ISSUER: process.env.AUTH_MICROSOFT_ENTRA_ID_ISSUER,
-    DATABASE_URL: process.env.DATABASE_URL,
+    CE_DATABASE_URL: process.env.CE_DATABASE_URL,
+    SAGE_DATABASE_URL: process.env.SAGE_DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
   },
   /**

@@ -1,16 +1,25 @@
 import { env } from "@/env";
-import { PrismaClient } from "../../generated/prisma";
+import { PrismaClient as CEClient } from "../../generated/ce";
+import { PrismaClient as SageClient } from "../../generated/sage";
 
-const createPrismaClient = () =>
-  new PrismaClient({
+const createCEClient = () =>
+  new CEClient({
     log:
       env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
   });
 
+const createSageClient = () => new SageClient({
+    log:
+      env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
+})
+
 const globalForPrisma = globalThis as unknown as {
-  prisma: ReturnType<typeof createPrismaClient> | undefined;
+  ce_db: ReturnType<typeof createCEClient> | undefined;
+  sage_db: ReturnType<typeof createSageClient> | undefined;
 };
 
-export const db = globalForPrisma.prisma ?? createPrismaClient();
+export const ceDb = globalForPrisma.ce_db ?? createCEClient();
+export const sageDb = globalForPrisma.sage_db ?? createSageClient();
 
-if (env.NODE_ENV !== "production") globalForPrisma.prisma = db;
+if (env.NODE_ENV !== "production") globalForPrisma.ce_db = ceDb;
+if (env.NODE_ENV !== "production") globalForPrisma.sage_db = sageDb;
